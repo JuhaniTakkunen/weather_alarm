@@ -10,11 +10,11 @@ from requests.exceptions import RequestException
 from . import WeatherPoint
 from ._timed_cache import timed_cache
 
-CONFIG_FILE = 'configs.ini'
 FMI_URL = "http://opendata.fmi.fi/wfs"
+
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
-
 
 
 @timed_cache(minutes=60)
@@ -31,7 +31,7 @@ def _make_api_request(location: str) -> models.Response:
     return request(url=FMI_URL, params=params, method="get")
 
 
-def _parse_weather_report(content: bytes) -> Dict[datetime, WeatherPoint]:  # FIXME later:
+def _parse_weather_report(content: bytes) -> Dict[datetime, WeatherPoint]:
     # OrderedDict typing would cause problems: https://tinyurl.com/y6wwtre7
 
     xml_tree = etree.XML(content)

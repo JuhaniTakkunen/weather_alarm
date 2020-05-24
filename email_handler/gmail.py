@@ -42,10 +42,6 @@ def send_message(message: MIMEMultipart, to_addrs: Union[str, List]):
         )
 
 
-def send_html(subject, msg):
-    msg = _build_message(subject, msg)
+def send_html(subject, html_str):
+    msg = _build_message(subject, html_str)
     send_message(msg, EMAIL_TO_ADDRESS_COMMA_SEPARATED)
-
-
-if __name__ == "__main__":
-    pass
